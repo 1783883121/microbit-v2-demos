@@ -1,0 +1,25 @@
+# 该配置用来配置编译信息(配置后无需手动增加选项)
+
+# Configure builds for our target, the micro:bit's architecture
+[target.thumbv7em-none-eabihf]
+# Execute binary using gdb when calling cargo run
+runner = "arm-none-eabi-gdb"
+# Tweak to the linking process required by the cortex-m-rt crate
+rustflags = [
+    "-C",
+    "link-arg=-Tlink.x",
+    # The LLD linker is selected by default
+    #"-C", "linker=arm-none-eabi-ld",
+]
+
+# Automatically select this target when cargo building this project
+[build]
+target = "thumbv7em-none-eabihf"
+
+# [embed]
+# target = "thumbv7em-none-eabihf"
+
+# [target.'cfg(all(target_arch = "arm", target_os = "none"))']
+# rustflags = [
+#   "-C", "link-arg=-Tlink.x",
+# ]
